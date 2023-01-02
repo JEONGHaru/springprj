@@ -22,6 +22,10 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
@@ -30,4 +34,9 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+  <!-- 스프링은 500 에러만 잡아내기에 404는 따로 web.xml에서 설정해야함 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/jsp404.jsp</location>
+	</error-page>
 </web-app>
