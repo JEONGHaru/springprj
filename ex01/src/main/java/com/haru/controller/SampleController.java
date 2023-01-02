@@ -2,6 +2,9 @@ package com.haru.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.haru.domain.SampleDTO;
 import com.haru.domain.SampleDTOList;
@@ -93,5 +99,51 @@ public class SampleController {
 		log.info("page : "+page);
 		
 		return "/sample/ex04";
+	}
+	
+	
+	@GetMapping("/ex05")
+	public String ex05(RedirectAttributes rttr) {
+		log.info("ex05요청됨");
+		rttr.addFlashAttribute("msg", "게시판에 글등록이 되었습니다.");
+		
+		return "redirect:ex04?page=1";
+	}
+	
+	// @ResponseBody -> 리턴 데이터를 서버 -> 클라이언트에게 전달 : ajax시 사용됨
+	@GetMapping("/ex06")
+	public @ResponseBody SampleDTO ex06() {
+		log.info("/ex06 : sampleDTO ------------ ");
+		SampleDTO dto = new SampleDTO();
+		dto.setName("홍길동");
+		dto.setAge(20);
+		
+		return dto;
+	}
+	
+	@GetMapping("/ex07")
+	public ResponseEntity<String> ex07() {
+		log.info("ex07---------------------");
+		
+		//문자열을 JSON데이터 형식으로 만듬
+		String msg = "{\"name\":\"홍길동\"}";
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type","application/json;charset=UTF-8");
+		return new ResponseEntity<String>(msg, header, HttpStatus.OK);
+	}
+	
+	@GetMapping("/exUpload")
+	public void exUpload() {
+		log.info("exUpload -------------------------------");
+	}
+	
+	@PostMapping("/exUploadPost")
+	public void exUploadPost(ArrayList<MultipartFile> files) {
+		files.forEach(file -> {
+			log.info("------------------------------------");
+			log.info("originalName : " + file.getOriginalFilename());
+			log.info("size : " + file.getSize());
+			
+		});
 	}
 }

@@ -13,10 +13,6 @@
 </c:if>
 </head>
 <body>
-sampleDTO : ${sampleDTO}<br/>
-<div>
-	page : ${page}
-</div>
-
+${msg }
 </body>
 </html>
