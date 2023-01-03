@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.haru.mapper.BoardMapper">
+  	<select id="getList" resultType="com.haru.domain.BoardDTO">
+  		<!-- CDATA -> mybatis에서 DB 처리문을 해석해서 되는지 확인 처리 -> 해석이 안되는도 DB서버에 그대로 넘겨줌 
+  		 '< '나 '>' 같이 태그 여닫이를 스크립문장으로 해석해 오류를 냄 
+  		-->
+  		<![CDATA[
+  		SELECT * FROM tbl_board WHERE bno > 0
+  		]]>
+  	</select>
+  	
+  	<insert id="insert">
+  		INSERT INTO tbl_board(title,content,writer)
+  		VALUES(#{title},#{content},#{writer})
+  	</insert>
+  	<insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno" parameterType="com.haru.domain.BoardDTO">
+  		INSERT INTO tbl_board(title,content,writer)
+  		VALUES (#{title},#{content},#{writer})
+  	</insert>
+  	
+  	<select id="read" resultType="com.haru.domain.BoardDTO">
+  		SELECT * FROM tbl_board WHERE bno = #{bno}
+  	</select>
+  	
+  	<delete id="delete">
+  		DELETE FROM tbl_board
+  		WHERE bno = #{bno}
+  	</delete>
+  	
+  	<update id="update">
+  		UPDATE tbl_board
+  		SET
+  			title = #{title},
+  			content = #{content},
+  			writer = #{writer},
+  			updateDate = NOW()
+		WHERE bno = #{bno} 
+  	</update>
+  </mapper>
