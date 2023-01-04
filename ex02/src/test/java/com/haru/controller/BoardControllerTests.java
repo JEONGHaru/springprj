@@ -87,7 +87,7 @@ public class BoardControllerTests {
 			String resultPage=
 					mockMvc.perform(MockMvcRequestBuilders
 							.post("/board/remove")
-							.param("bno", "21")
+							.param("bno", "21").param("amount", "10")
 							).andReturn().getModelAndView().getViewName();
 			log.info("jsp또는 이동할 URL 정보 -- resultPage : " + resultPage);
 						
