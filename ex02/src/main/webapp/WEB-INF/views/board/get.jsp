@@ -39,9 +39,9 @@
                             	<input class="form-control" name="writer" value="${board.writer}" readonly="readonly">
                             </div>
                             <button data-oper="modify" class="btn btn-default"
-                            	onclick="location='modify?bno=${board.bno}'">Modify</button>
+                            	onclick="location='modify?bno=${board.bno}&pageNum=${param.pageNum}&amount=${param.amount}'">Modify</button>
                             <button data-oper="list" class="btn btn-default"
-                            	onclick="location='list'">List</button>
+                            	onclick="location='list?pageNum=${param.pageNum}&amount=${param.amount}'">List</button>
                         </div>
                         <!-- /.panel-body -->
                     </div>

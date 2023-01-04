@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.haru.domain.BoardDTO;
+import com.haru.domain.Criteria;
 import com.haru.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -44,10 +45,21 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.delete(bno) == 1;
 	}
 
+//	@Override
+//	public List<BoardDTO> getList() {
+//		log.info("게시판 리스트-------------------");
+//		return mapper.getList();
+//	}
 	@Override
-	public List<BoardDTO> getList() {
-		log.info("게시판 리스트-------------------");
-		return mapper.getList();
+	public List<BoardDTO> getList(Criteria criteria) {
+		log.info("게시판 리스트 페이징 처리------------------- criteria : " + criteria);
+		return mapper.getListWithPaging(criteria);
+	}
+
+	@Override
+	public int getTotal(Criteria criteria) {
+		log.info("게시판 총 토탈 개수 -----------");
+		return mapper.getTotalCount(criteria);
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.haru.domain.BoardDTO;
+import com.haru.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -40,8 +41,9 @@ public class BoardServiceTests {
 	//게시판 리스트 테스트
 	@Test
 	public void testGetList() {
-		log.info("service.getList() ---- 게시판 리스트 : "+service.getList());
-		service.getList().forEach(board -> log.info(board));
+		Criteria criteria = new Criteria();
+		log.info("service.getList() ---- 게시판 리스트 : "+service.getList(criteria));
+		service.getList(criteria).forEach(board -> log.info(board));
 	}
 	
 	//게시판 보기

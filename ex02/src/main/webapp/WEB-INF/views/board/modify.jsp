@@ -32,6 +32,8 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 	                        <form role="form" method="POST" id="modifyForm">
+	                        <input type="hidden" name="pageNum" value="${param.pageNum}">
+	                        <input type="hidden" name="amount" value="${param.amount}">
 	                            <div class="form-group">
 	                            	<label>Bno</label>
 	                            	<input class="form-control" name="bno" value="${board.bno}" readonly="readonly">
@@ -51,7 +53,7 @@
 	                            <button data-oper="modify" class="btn btn-default">Modify</button>
 	                            <button data-oper="remove" class="btn btn-danger">Remove</button>
 	                            <button data-oper="list" class="btn btn-default" type="button"
-	                            	onclick="location='list'">List</button>
+	                            	onclick="location='list?pageNum=${param.pageNum}&amount=${param.amount}'">List</button>
 	                        </form>
                         </div>
                       

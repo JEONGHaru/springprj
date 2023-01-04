@@ -3,6 +3,7 @@ package com.haru.service;
 import java.util.List;
 
 import com.haru.domain.BoardDTO;
+import com.haru.domain.Criteria;
 
 public interface BoardService {
 
@@ -14,7 +15,9 @@ public interface BoardService {
 	
 	public boolean remove(int bno); //delete
 	
-	public List<BoardDTO> getList(); // list
+	//public List<BoardDTO> getList(); // list
 	
+	public List<BoardDTO> getList(Criteria criteria); //페이징처리된 List
 	
+	public int getTotal(Criteria criteria);
 }
