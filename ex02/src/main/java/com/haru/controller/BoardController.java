@@ -1,5 +1,8 @@
 package com.haru.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,12 +81,17 @@ public class BoardController {
 	
 	//게시판 글수정 처리
 	@PostMapping("/modify")
-	public String modify(BoardDTO board, Criteria criteria,  RedirectAttributes rttr) {
+	public String modify(BoardDTO board, Criteria criteria,  RedirectAttributes rttr) throws Exception {
 		log.info("----------modify------------" + board);
 		if(service.modify(board))
-		rttr.addFlashAttribute("result","modify success bno : " + board.getBno());
-		return "redirect:get?bno=" + board.getBno() +"&pageNum=" 
-		+ criteria.getPageNum() +"&amount="+criteria.getAmount();
+			rttr.addFlashAttribute("result","modify success bno : " + board.getBno());
+		log.info("criteria.getType()------------------------------: "+criteria.getType());
+		log.info("criteria.getPageNum()------------------------------: "+criteria.getPageNum());
+		return "redirect:get?bno=" + board.getBno() 
+		+"&pageNum="+ criteria.getPageNum() 
+		+"&amount="+criteria.getAmount()
+		+"&type="+criteria.getType()
+		+"&keyword="+URLEncoder.encode(criteria.getKeyword(),"UTF-8") ;
 	}
 	
 	//게시판 글삭제

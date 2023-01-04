@@ -53,6 +53,28 @@
                                </tbody>
                             </table>
                             
+                            <!-- 검색 폼 -->
+                            <div class="row">
+                            	<div class="col-lg-12">
+                            		<form id="searchForm">
+	                            		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum}">
+	                           			<input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
+                            			<select name="type">
+                            				<option value="">---</option>
+                            				<option value="T">제목</option>
+                            				<option value="C">내용</option>
+                            				<option value="W">작성자</option>
+                            				<option value="TC">제목 or 내용</option>
+                            				<option value="TW">제목 or 작성자</option>
+                            				<option value="WC">작성자 or 내용</option>
+                            				<option value="TWC">제목 or 작성자 or 내용</option>
+                            			</select>
+                            			<input name="keyword">
+                            			<button class="btn btn-default">search</button>
+                            		</form>
+                            	</div>
+                            </div>
+                            
                             <div class="row">
                             <!-- 현재 페이지와 전체 페이지 정보 -->
                             	<div class="col-md-4">${pageMaker.criteria.pageNum}/${pageMaker.totalPage}</div>
@@ -86,10 +108,17 @@
             <form id="actionForm" action="list">
             	<!-- 클릭한 href에 들어있는 페이지 번호를 바꿔준다 -->
             	<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum}" id="pageNum">
-            	<input type="hidden" name="amount" value="${pageMaker.criteria.amount}" id="amount">
+            	<input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
+            	<input type="hidden" name="type" value="${pageMaker.criteria.type}">
+            	<input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
             </form>
             <script type="text/javascript">
 	$(function(){
+		
+		//검색 데이터 세팅
+		var searchForm = $("#searchForm");
+		$(searchForm).find("select").val("${param.type}");
+		$(searchForm).find("input[name='keyword']").val("${param.keyword}");
 		
 		//amount 값 세팅
 		$("#selAmount").val("${param.amount}");
@@ -119,6 +148,29 @@
 		//amount 변경 이벤트
 		$("#selAmount").on("change",function(){
 			location = "list?amount="+$(this).val();
+		});
+		
+		//검색을 위한 유효성 검사
+		/* var searchForm = $("#searchForm");
+		$(searchForm).on("submit",function(e){
+			e.preventDefault();
+			alert("검색폼 서브밋이벤트");
+		}); */
+		
+		
+		$(searchForm).on("click","button",function(e){
+			e.preventDefault();
+			//alert("검색폼 버튼의 클릭이벤트");
+			//if(!searchForm.find("option:selected").val())
+			//alert(searchForm.find("select").val());	
+			if(!searchForm.find("select").val()){
+				alert("검색 종류를 선택하세요");
+				searchForm.find("select").focus();
+				return false;
+			}
+			
+			searchForm.find("input[name='pageNum']").val("1");
+			searchForm.submit();
 		});
 	});
 </script>

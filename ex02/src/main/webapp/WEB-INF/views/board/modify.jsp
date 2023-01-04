@@ -9,7 +9,7 @@
 			$("button[data-oper='remove']").on("click",function(){
 				if(!confirm("정말 삭제 하시겠습니까?")) return false;
 				formObj.attr("action","remove");
-				/* formObj.submit(); */
+				formObj.submit();
 			});
 		});
 	</script>	
@@ -34,6 +34,8 @@
 	                        <form role="form" method="POST" id="modifyForm">
 	                        <input type="hidden" name="pageNum" value="${param.pageNum}">
 	                        <input type="hidden" name="amount" value="${param.amount}">
+<%-- 	                        <input type="hidden" name="type" value="${param.type}"> --%>
+<%-- 	                        <input type="hidden" name="keyword" value="${param.keyword}"> --%>
 	                            <div class="form-group">
 	                            	<label>Bno</label>
 	                            	<input class="form-control" name="bno" value="${board.bno}" readonly="readonly">
@@ -53,7 +55,7 @@
 	                            <button data-oper="modify" class="btn btn-default">Modify</button>
 	                            <button data-oper="remove" class="btn btn-danger">Remove</button>
 	                            <button data-oper="list" class="btn btn-default" type="button"
-	                            	onclick="location='list?pageNum=${param.pageNum}&amount=${param.amount}'">List</button>
+	                            	onclick="history.back()">Cancel</button>
 	                        </form>
                         </div>
                       

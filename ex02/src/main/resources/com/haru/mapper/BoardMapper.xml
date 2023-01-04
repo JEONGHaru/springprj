@@ -14,7 +14,11 @@
   	
   	<select id="getTotalCount" resultType="int">
   		<![CDATA[
-  			SELECT COUNT(*) FROM tbl_board WHERE bno > 0
+  			SELECT COUNT(*) FROM tbl_board WHERE 
+  		]]>
+  		<include refid="criteria" />
+  		<![CDATA[
+  			bno > 0
   		]]>
   	</select>
   	
@@ -23,9 +27,34 @@
   		 '< '나 '>' 같이 태그 여닫이를 스크립문장으로 해석해 오류를 냄 
   		-->
   		<![CDATA[
-  		SELECT * FROM tbl_board ORDER BY regDate DESC LIMIT ${(pageNum-1)*10},#{amount} 
+  		SELECT * FROM tbl_board WHERE 
+  		]]>
+  		<include refid="criteria"></include>
+  		<![CDATA[
+  		bno > 0 ORDER BY regDate DESC LIMIT ${(pageNum-1) * amount},#{amount}	
   		]]>
   	</select>
+  	
+  	<!-- 검색을 위한 쿼리 -->
+  	<sql id="criteria">
+  		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+  			<foreach collection="typeArr" item="type">
+  				<trim prefix="OR">
+  					<choose> <!-- java의 switch와 동일 -->
+  						<when test="type == 'T'.toString()">
+  							title LIKE CONCAT('%',#{keyword},'%')
+  						</when>
+  						<when test="type == 'C'.toString()">
+  							content LIKE CONCAT('%',#{keyword},'%')
+  						</when>
+  						<when test="type == 'W'.toString()">
+  							writer LIKE CONCAT('%',#{keyword},'%')
+  						</when>
+  					</choose>
+  				</trim>
+  			</foreach>
+  		</trim>
+  	</sql>
   	
   	<insert id="insert">
   		INSERT INTO tbl_board(title,content,writer)

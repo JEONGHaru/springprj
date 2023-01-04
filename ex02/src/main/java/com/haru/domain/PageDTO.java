@@ -22,8 +22,8 @@ public class PageDTO {
 		this.total = total;
 		
 		//화면에 보여줄 페이지 계산
-		this.endPage = (int)(Math.ceil(criteria.getPageNum()/10.0)*10);
-		this.startPage = this.endPage -9;
+		this.endPage = (int)(Math.ceil(criteria.getPageNum()/5.0)*5);
+		this.startPage = this.endPage -4;
 		
 		//전체 데이터의 마지막 페이지
 		int realEnd = getTotalPage();
