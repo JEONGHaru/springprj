@@ -23,7 +23,7 @@ var replyService = (function(){
                 //alert(JSON.stringify(data));
                 //callback함수가 있으면 callback함수를 실행하자
                 if(callback){
-                    callback(data);
+                    callback(data.replyCnt,data.list);
                 //callback함수가 없으면 처리되는 처리문
                 }else{
                     if(data.length > 0) {alert("데이터가 있습니다")}

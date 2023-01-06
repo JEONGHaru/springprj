@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.haru.domain.Criteria;
 import com.haru.domain.ReplyDTO;
+import com.haru.domain.ReplyPageDTO;
 
 public interface ReplyMapper {
 
@@ -14,6 +15,9 @@ public interface ReplyMapper {
 			@Param("cri") Criteria criteria,
 			@Param("bno") int bno
 			);
+	
+	//해당하는 글에 대한 댓글 전체 개수 가져오기
+	public int getCountByBno(int bno);
 	
 	//댓글 등록
 	public int insert(ReplyDTO dto);

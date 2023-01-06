@@ -23,7 +23,7 @@
   	</select>
   	
   	<select id="getListWithPaging" resultType="com.haru.domain.BoardDTO">
-  		<!-- CDATA -> mybatis에서 DB 처리문을 해석해서 되는지 확인 처리 -> 해석이 안되는도 DB서버에 그대로 넘겨줌 
+  		<!-- CDATA -> mybatis에서 DB 처리문을 해석해서 되는지 확인 처리 -> 해석이 안되도 DB서버에 그대로 넘겨줌 
   		 '< '나 '>' 같이 태그 여닫이를 스크립문장으로 해석해 오류를 냄 
   		-->
   		<![CDATA[

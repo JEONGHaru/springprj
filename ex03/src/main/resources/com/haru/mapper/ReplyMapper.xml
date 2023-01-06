@@ -6,13 +6,24 @@
   
   <!-- 댓글 리스트 -->
   	<select id="getListWithPaging" resultType="com.haru.domain.ReplyDTO">
-  		SELECT 
-  			rno,bno,reply,replyer,replyDate,updateDate
-  		FROM 
-  			tbl_reply WHERE bno = #{bno}
-  		ORDER BY rno ASC
+	  	<![CDATA[
+	  		SELECT rno,bno,reply,replyer,replyDate,updateDate
+			FROM(
+				SELECT /*+INDEX(tbl_reply idx_reply)*/
+			    rno,bno,reply,replyer,replyDate,updateDate
+				FROM tbl_reply WHERE bno = #{bno} AND rno > 0
+			    LIMIT ${(cri.pageNum-1) * cri.amount},#{cri.amount}
+			    )reply_paging
+	    ]]>
   	</select>
-  	
+  <!-- 해당하는 글에대한 댓글 전체 개수 가져오기 -->
+  <select id="getCountByBno" resultType="int">
+	  <![CDATA[
+	  	SELECT COUNT(rno)
+	  	FROM tbl_reply
+	  	WHERE bno = #{bno}
+	  ]]>
+  </select>	
   <!-- 댓글 등록 -->
 	<insert id="insert">
 	  	INSERT INTO 

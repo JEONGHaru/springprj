@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.haru.domain.Criteria;
 import com.haru.domain.ReplyDTO;
+import com.haru.domain.ReplyPageDTO;
 import com.haru.mapper.ReplyMapper;
 
 import lombok.Setter;
@@ -20,11 +21,19 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyMapper mapper;
 	
 	//댓글 리스트
+//	@Override
+//	public List<ReplyDTO> getList(Criteria cri, int bno) {
+//		log.info("get reply list ------------- cri : " + cri +", bno: " + bno);
+//		
+//		return mapper.getListWithPaging(cri, bno);
+//	}
+	
+	//댓글 리스트
 	@Override
-	public List<ReplyDTO> getList(Criteria cri, int bno) {
+	public ReplyPageDTO getList(Criteria cri, int bno) {
 		log.info("get reply list ------------- cri : " + cri +", bno: " + bno);
 		
-		return mapper.getListWithPaging(cri, bno);
+		return new ReplyPageDTO(mapper.getCountByBno(bno),mapper.getListWithPaging(cri, bno));
 	}
 	
 	//댓글 등록

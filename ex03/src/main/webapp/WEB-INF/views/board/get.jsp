@@ -13,18 +13,29 @@
 <script type="text/javascript">
 	//reply.js 객체를 사용해보자
 	$(function(){
-		console.log("-------------------------------");
-		console.log("JS TEST");
+		//console.log("-------------------------------");
+		//console.log("JS TEST");
 		var bnoValue = '${board.bno}';
 		var replyUL = $(".chat");
 		//자동으로 한번은 댓글이 실행이 되야함. 페이지는 : 1로만
 		showList(1);
 		//자동으로 실행이 안되고 호출해야 실행됨
 		function showList(page){
+			console.log("showList------page : "+page);
 		//getList(서버로 전달데이터,서버에 갔다오면 처리되는 함수(callback),에러를 처리되는 함수(error))
 		replyService.getList(
 				{bno: bnoValue , page : page || 1},
-				function(list){
+				function(replyCnt,list){
+					
+					//넘어오는 데이터 확인하기
+					//console.log("replyCnt : " + replyCnt);
+					//console.log("list : " + list);
+					
+					/* if(page == -1){
+						pageNum = Math.ceil(replyCnt/10.0);
+						showList(pageNum);
+						return;
+					} */
 					//list가 넘어오지않았거나 데이터가 없는경우 처리하지 않는다
 					if(list ==null || list.length == 0){
 						replyUL.html("");
@@ -45,6 +56,7 @@
 						str += "</li>";
 					} //for 문의 끝 - str의 완성  : 데이터가 있는 만큼li tag 가 생긴다
 					replyUL.html(str); // 원래 있던것은 사라지고 덮어쓰기가 된다
+					showReplyPage(replyCnt);
 				}		
 		); //replyService.getList()의 끝
 		} //showList()의 끝
@@ -113,7 +125,7 @@
 			//replyService로 보낸다
 			replyService.update(reply,function(result){
 				alert(result);
-				showList(1)
+				showList(pageNum)
 			});
 		})//모달 reply 수정 이벤트끝
 		
@@ -132,7 +144,55 @@
 			},function(err){
 				alert("Error..... : " + err)
 			})
-		})//모달 reply 수정 이벤트끝	
+		})//모달 reply 수정 이벤트끝
+		
+		var pageNum = 1;
+		var replyPageFooter = $("#footer_replyPagenation");
+		
+		//reply pagenation 을 위한 처리
+		function showReplyPage(replyCnt){
+			// 10 = 페이지에 보여주고 싶은 댓글 개수
+			var endNum = Math.ceil(pageNum / 10.0) * 10;
+			var startNum = endNum - (10-1);
+			
+			var prev = startNum != 1;
+			var next = false;
+			
+			if(endNum * 10 >= replyCnt) endNum = Math.ceil(replyCnt/10.0);
+			if(endNum * 10 < replyCnt) next = true;
+			//이전 페이지 표시
+			var str = "<ul class='pagination pull-right'>";
+			if(prev){
+				str += "<li class='page-item'><a class='page-link' href='"+(startNum-1)+"'>Previous</a></li>"
+			}
+			//시작~마지막 페이지까지
+			for(var i = startNum ; i <= endNum; i++){
+				//현재 페이지 표시
+				var active = pageNum == i ? "active" : "";
+				str += "<li class='page-item "+active+"'><a class='page-link' href='"+i+"'>"+i+"</a></li>"
+			}
+			//다음 페이지 표시
+			if(next){
+				str += "<li class='page-item'><a class='page-link' href='"+(endNum+1)+"'>Next</a></li>"
+			}
+			str += "</ul>"
+			console.log(str);
+			//pagenation객체의 HTML에 넣는다
+			replyPageFooter.html(str);
+		}// reply pagenation 처리함수끝
+		
+		//pagenation 페이지  이벤트 함수
+		//이떄는 반드시 on 함수를 사용해야만 함 - JS에 의해서 새로생긴 태그에는 이벤트는 주어지지않는다.
+		replyPageFooter.on("click","li a",function(e){
+			//a태그 이벤트 무시
+			e.preventDefault();
+			//alert("댓글 페이지 이동클릭");
+			
+			var targetPageNum = $(this).attr("href");
+			pageNum = targetPageNum;
+			
+			showList(pageNum);
+		})
 	});
 </script>
         <div id="page-wrapper">
@@ -194,6 +254,10 @@
 					  		
 					  	</ul>
 					  	<!-- /.chat -->
+					  	<div class="panel-footer" id="footer_replyPagenation">
+					  		
+					  	</div>
+					  	<!-- /.panel-footer -->
 					  </div>
 					  <!-- /.panel-body -->
 					</div>

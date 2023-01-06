@@ -1,7 +1,5 @@
 package com.haru.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.haru.domain.Criteria;
 import com.haru.domain.ReplyDTO;
+import com.haru.domain.ReplyPageDTO;
 import com.haru.service.ReplyService;
 
 import lombok.AllArgsConstructor;
@@ -36,7 +35,8 @@ public class ReplyController {
 					  MediaType.APPLICATION_XML_VALUE,
 					  MediaType.APPLICATION_JSON_VALUE}
 			)
-	public ResponseEntity<List<ReplyDTO>> getList(
+	//public ResponseEntity<List<ReplyDTO>> getList(
+	  public ResponseEntity<ReplyPageDTO> getList(
 			@PathVariable("page") int page,
 			@PathVariable("bno") int bno
 			){
@@ -44,11 +44,11 @@ public class ReplyController {
 		Criteria cri = new Criteria(page,10);
 		log.info(cri);
 		
-		List<ReplyDTO> list = service.getList(cri, bno);
-		for(ReplyDTO dto : list) {
-			dto.setReply(dto.getReply().replaceAll("\n","<br>"));
+		ReplyPageDTO dto = service.getList(cri, bno);
+		for(ReplyDTO d : dto.getList()) {
+			d.setReply(d.getReply().replaceAll("\n","<br>"));
 		}
-		return new ResponseEntity<>(list,HttpStatus.OK);
+		return new ResponseEntity<>(dto,HttpStatus.OK);
 	}
 	
 	//댓글 등록
