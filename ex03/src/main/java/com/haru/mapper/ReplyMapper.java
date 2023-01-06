@@ -18,5 +18,9 @@ public interface ReplyMapper {
 	//댓글 등록
 	public int insert(ReplyDTO dto);
 	
+	//댓글 수정
+	public int update(ReplyDTO dto);
 	
+	//댓글 삭제
+	public int delete(int rno);
 }

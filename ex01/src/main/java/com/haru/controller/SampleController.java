@@ -143,7 +143,9 @@ public class SampleController {
 			log.info("------------------------------------");
 			log.info("originalName : " + file.getOriginalFilename());
 			log.info("size : " + file.getSize());
+			 
 			
 		});
+		
 	}
 }

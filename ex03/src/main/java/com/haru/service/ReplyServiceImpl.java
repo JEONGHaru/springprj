@@ -34,4 +34,20 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.insert(dto);
 	}
 
+	//댓글 수정
+	@Override
+	public int modify(ReplyDTO dto) {
+		log.info("reply modify ---------------------- dto : " + dto);
+		
+		return mapper.update(dto);
+	}
+
+	//댓글 삭제
+	@Override
+	public int remove(int rno) {
+		log.info("reply remove ---------------------- rno : " + rno);
+		
+		return mapper.delete(rno);
+	}
+
 }

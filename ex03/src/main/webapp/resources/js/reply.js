@@ -95,10 +95,63 @@ var replyService = (function(){
             }
         }
     );
- }//댓글 등록의 끝   
+ }//댓글 등록의 끝 
+
+ //댓글 수정
+ function update(reply,callback,error){
+    //alert("update reply(json) : " + JSON.stringify(reply));
+    $.ajax(
+        {
+            type : "PUT",
+            url : "/replies/"+reply.rno,
+            data : JSON.stringify(reply),
+            contentType : "application/json; charset=UTF-8",
+            success : function(result,status,xhr){ //처리가 성공했을떄
+                if(callback){
+                    callback(result);     
+                }
+            },
+            error : function(xhr,status,err){ //처리가 실패했을때
+                if(error){
+                    error(err);
+                }else{
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(err);
+                }
+            }
+
+    })
+ }//댓글 수정의 끝
+ //댓글 삭제
+ function remove(rno,callback,error){
+    //alert("remove rno : " +rno );
+    $.ajax(
+        {
+            type : "DELETE",
+            url : "/replies/"+rno,
+            success : function(result,status,xhr){ //처리가 성공했을떄
+                if(callback){
+                    callback(result);     
+                }
+            },
+            error : function(xhr,status,err){ //처리가 실패했을때
+                if(error){
+                    error(err);
+                }else{
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(err);
+                }
+            }
+
+    }); 
+ }//댓글 수정의 끝
 return {
     getList : getList,
     displayTime : displayTime,
-    add : add
+    add : add,
+    update : update,
+    remove : remove
 };
 })();

@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp" %>
+<style type="text/css">
+	.chat > li:hover{
+		cursor:pointer;
+	}
+</style>
+
 <script type="text/javascript" src="/resources/js/reply.js" ></script>
 <script type="text/javascript">
 	//reply.js 객체를 사용해보자
@@ -48,6 +54,8 @@
 			//모달창의 데이터를 지운다
 			$("#modalReply,#modalReplyer").val("");
 			//필요한 입력 항목은 보이게 필요없는 항목은 보이지않게 처리
+			$("#modalUpdateBtn,#modalDeleteBtn").hide();
+			$("#modalRegisterBtn").show();
 			//모달창을 보이게 한다
 			$("#myModal").modal("show");
 		});
@@ -71,9 +79,60 @@
 			
 			//모달창 닫기
 			$("#myModal").modal("hide");
-		});
+		});//모달창의 등록 버튼 이벤트의 끝
 		
-				
+		// 댓글을 클릭하면 수정/삭제 이벤트 모달창
+		$(replyUL).on("click","li",function(){
+			//alert("댓글 수정/삭제를 진행");
+			//rno를 찾아 와서 모달에 세팅하자 (data-* 를 활용)
+			var rno = $(this).data("rno");
+			//alert(rno);
+			//수정할 데이터 세팅
+			var reply = $(this).find("p").html();
+			var replyer = $(this).find("strong").html();
+			//alert(reply);
+			$("#modalReply").val(reply.replaceAll("<br>","\n"));
+			$("#modalReplyer").val(replyer);
+			//필요한 버튼은 보이게 
+			$("#myModal").data("rno",rno);
+			//alert($("#myModal").data("rno"));
+			$("#modalUpdateBtn,#modalDeleteBtn").show();
+			$("#modalRegisterBtn").hide();
+			$("#myModal").modal("show");
+			
+		});//댓글 수정/삭제 이벤트 모달창의 끝
+		
+		//모달 reply 수정 이벤트
+		$("#modalUpdateBtn").on("click",function(){
+				$("#myModal").modal("hide");
+			var reply = {
+					reply :  $("#modalReply").val(),
+					replyer :  $("#modalReplyer").val(),
+					rno : $("#myModal").data("rno")
+			}
+			//replyService로 보낸다
+			replyService.update(reply,function(result){
+				alert(result);
+				showList(1)
+			});
+		})//모달 reply 수정 이벤트끝
+		
+		//모달 reply 삭제 이벤트
+		$("#modalDeleteBtn").on("click",function(){
+			var rno = $("#myModal").data("rno");
+				//alert(rno);
+				$("#myModal").modal("hide");
+			//replyService로 보낸다
+			replyService.remove(rno,
+				//성공했을때 실행되는 함수
+				function(result){
+				alert(result);
+				showList(1)
+				//실패했을때 실행되는 함수
+			},function(err){
+				alert("Error..... : " + err)
+			})
+		})//모달 reply 수정 이벤트끝	
 	});
 </script>
         <div id="page-wrapper">
@@ -164,6 +223,8 @@
       	</div>
       </div>
       <div class="modal-footer">
+        <button class="btn btn-warning" id="modalUpdateBtn">Update</button>
+        <button class="btn btn-danger" id="modalDeleteBtn">Delete</button>
         <button class="btn btn-primary" id="modalRegisterBtn">Register</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>

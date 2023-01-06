@@ -12,4 +12,10 @@ public interface ReplyService {
 	
 	//댓글 등록
 	public int register(ReplyDTO dto);
+	
+	//댓글 수정
+	public int modify(ReplyDTO dto);
+	
+	//댓글 삭제
+	public int remove(int rno);
 }

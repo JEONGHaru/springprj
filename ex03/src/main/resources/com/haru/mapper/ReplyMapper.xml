@@ -6,14 +6,38 @@
   
   <!-- 댓글 리스트 -->
   	<select id="getListWithPaging" resultType="com.haru.domain.ReplyDTO">
-  		SELECT rno,bno,reply,replyer,replyDate,updateDate
-  		FROM tbl_reply WHERE bno = #{bno}
+  		SELECT 
+  			rno,bno,reply,replyer,replyDate,updateDate
+  		FROM 
+  			tbl_reply WHERE bno = #{bno}
   		ORDER BY rno ASC
   	</select>
   	
   <!-- 댓글 등록 -->
 	<insert id="insert">
-	  	INSERT INTO tbl_reply(bno,reply,replyer)
-	  	VALUES(#{bno},#{reply},#{replyer})
+	  	INSERT INTO 
+	  		tbl_reply(bno,reply,replyer)
+	  	VALUES(
+	  		#{bno},#{reply},#{replyer}
+	  		)
 	</insert>	
+	
+ <!-- 댓글 수정 -->
+ 	<update id="update">
+ 		UPDATE 
+ 			tbl_reply
+ 		SET 
+ 			reply = #{reply},
+ 			replyer = #{replyer}
+		WHERE 
+			rno = #{rno}
+ 	</update>
+ <!-- 댓글 삭제 -->
+ 	<delete id="delete">
+ 		DELETE FROM
+ 			tbl_reply
+ 		WHERE
+ 			rno = #{rno}
+ 			
+ 	</delete>
   </mapper>
