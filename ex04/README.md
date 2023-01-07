@@ -55,6 +55,7 @@ FROM tbl_board b;
 ```
 
 ## 댓글을 delete를 한다
+```sql
 DELETE FROM tbl_reply
 WHERE rno = 761;
 ```
