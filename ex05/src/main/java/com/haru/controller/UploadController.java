@@ -134,7 +134,7 @@ public class UploadController {
 	}
 	//파일을 보여주는 method
 	//url - display/fileName=**
-	@GetMapping("/diplay")
+	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) throws Exception{
 		ResponseEntity<byte[]> result = null;

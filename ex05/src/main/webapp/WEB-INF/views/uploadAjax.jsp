@@ -114,11 +114,11 @@
 					alert(result);
 					deleteX.closest("li").remove();
 				}
-			})
-		})
+			});
+		});// 파일삭제 이벤트 끝
 		
-		var uploadResult = $(".uploadResult ul");
 		//파일명 리스트를 보여줄 UL 태크
+		var uploadResult = $(".uploadResult ul");
 		//보여줄 함수
 		function showUploadFile(list){
 			//ul tag 비우기
@@ -184,7 +184,8 @@
 </div>
 
 <button id="uploadBtn">uploadFile</button>
-<div class="uploadResult">
+
+<div class="uploadResult well">
 	<ul></ul>
 </div>
 <div class="bigPictureWrapper">
