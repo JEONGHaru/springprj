@@ -15,3 +15,9 @@ ALTER TABLE tbl_attach
 ADD CONSTRAINT fk_board_attach
 FOREIGN KEY (bno) REFERENCES tbl_board(bno);
 ```
+## 하루전 추가된 파일 불러오기
+```sql
+SELECT * FROM tbl_attach 
+WHERE uploadPath = 
+DATE_FORMAT(ADDDATE(NOW(), INTERVAL -1 DAY),'%Y/%m/%d');
+```
