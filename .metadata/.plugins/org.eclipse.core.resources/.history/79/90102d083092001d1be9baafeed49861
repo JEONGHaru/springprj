@@ -1,0 +1,19 @@
+package com.haru.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class Criteria {
+	
+	//ペインティングための変数
+	private int pageNum; //現在のページ
+	private int amount; //１ページに表示されるデータの数
+	
+	//検索のための変数
+	private String field; //検索項目
+	private String keyword; //検索単語
+}

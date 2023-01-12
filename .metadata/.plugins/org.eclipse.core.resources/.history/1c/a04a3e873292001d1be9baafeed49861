@@ -1,0 +1,5 @@
+package com.haru.service;
+
+public class BoardService {
+
+}

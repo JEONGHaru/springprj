@@ -26,9 +26,10 @@ public class FileCheckTask {
 	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
 	
-	//(cron ="초 *분 *시 *일 *월 *")
+	//(cron ="*-초 *-분 *-시 *-일 *-월 *-주")
 	//주기적으로 삭제해야할 파일을 찾아서 삭제해주는 메서드
-	@Scheduled(cron ="0 * * * * *")
+	//@Scheduled(cron ="0 * * * * *")
+	@Scheduled(cron ="0 0 2 * * *") //새벽2시에 동작
 	public void chechFiles() throws Exception{
 		log.warn("File Check Task Run------------------------");
 		

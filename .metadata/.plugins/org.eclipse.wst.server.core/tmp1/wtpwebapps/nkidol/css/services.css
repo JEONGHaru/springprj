@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+
+
+#services {
+	background-color: rgba(96, 125, 139, 0.1);
+}
+
+#services .korea{
+	width: 100px;
+    height: 100px;
+    border: 5px solid transparent;
+    border-radius: 90%;
+    background-image: linear-gradient(to top,#083be2 10%,#f21128 );
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    margin: 2rem auto;
+    
+}
+#services .japan{
+	width: 100px;
+    height: 100px;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    background-image: linear-gradient(to top, #f21128 70%,#ffb199 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    margin: 2rem auto;
+    
+}
+
+#services .services-col .card {
+	transition: 0.4s ease;
+}
+
+#services .services-col .card:hover {
+	transform: translateY(-0.8rem);
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0
+		rgba(0, 0, 0, 0.15);
+}
+
+.myCard{
+	transition: 0.4s ease;
+	
+}
+.myCard:hover {
+	transform: translateY(-0.8rem);
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0
+		rgba(0, 0, 0, 0.15);
+}
+
+#services .services-col img {
+	height: 13rem;
+	object-fit: cover;
+	object-position: center;
+}
+
+.card img:hover{
+	cursor:pointer;
+}
+
+
+#services .card{
+	width:100%;
+	height:25rem;
+}
+
+#myButton:active, #myButton:focus, #myButton:hover {
+outline:none !important;
+box-shadow:none !important;}

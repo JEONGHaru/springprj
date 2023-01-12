@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
-@AllArgsConstructor
+@AllArgsConstructor //생성자를 이용한 자동 DI 스프링 4.3부터 단일 파라미터를 받는 경우 생성자를 통해 자동 DI
 public class BoardServiceImpl implements BoardService {
 
 	// @Autowired,@Inject,@Setter가 없다 - 프로퍼티(setter)에 데이터 전달 방식

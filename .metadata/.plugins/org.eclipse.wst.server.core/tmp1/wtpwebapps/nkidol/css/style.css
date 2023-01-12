@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/earlyaccess/kokoro.css");
+
+* {
+	font-family: 'Kokoro', serif;
+}
+a {
+	text-decoration-line: none;
+	color: inherit;
+}
+
+.dropdown-menu>li:hover>.submenu{
+	display: block;
+}
+.dropdown:hover .dropend {
+    display: block;
+    margin-top: 0;
+}
+.carousel-item>img {
+	height: 500px;
+}
+
+
+.card>img {
+	height: 175px;
+}
+.form-select {
+	width: 50%;
+}
+
+.mysearch {
+	width: 30%;
+}
+@media screen and (min-width: 992px){
+	.dropdown-menu li{
+	position: relative;
+}
+.dropdown-item{
+	text-align:center;
+}
+.dropdown-menu .submenu{
+	display:none;
+	position: absolute;
+	left:100%;
+	top: -7px;
+}
+}
