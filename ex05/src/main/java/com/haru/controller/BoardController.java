@@ -40,13 +40,13 @@ public class BoardController {
 //	}
 	//게시판 리스트
 	@GetMapping("/list")
-	public void list(Criteria criteria, Model model) {
-		log.info("---------list--------- criteria : " + criteria);
-		model.addAttribute("list",service.getList(criteria));
+	public void list(Criteria cri, Model model) {
+		log.info("---------list--------- criteria : " + cri);
+		model.addAttribute("list",service.getList(cri));
 		//화면에 필요한 정보 가저오기
-		model.addAttribute("pageMaker",new PageDTO(criteria,service.getTotal(criteria)));
+		model.addAttribute("pageMaker",new PageDTO(cri,service.getTotal(cri)));
 		log.info("list ----- model : "+model);
-		log.info("list ----- amound : "+criteria.getAmount());
+		log.info("list ----- amound : "+cri.getAmount());
 	}
 	
 //	@GetMapping("/getList")

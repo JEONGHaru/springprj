@@ -25,7 +25,7 @@
                            <option>20</option>
                            <option>25</option>
                            </select>
-                           <a href="register" class="btn btn-xs btn-default pull-right">Register New Board</a>
+                           <a href="register" class="btn btn-xs btn-default float-end">Register New Board</a>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

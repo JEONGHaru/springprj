@@ -60,7 +60,7 @@ $(function(){
 	//이미지 인경우 - 썸네일 파일을 따로만든다 - 이미지의 판단과 썸네일 작업은 JAVA(Controller)에서 
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$","i");
 	//현재 페이지에서의 파일 제한
-	var maxSize = 52428000; // 5MB(1024*1024*5)
+	var maxSize = 5242800; // 5MB(1024*1024*5)
 	//파일데이터의 유효성 검사
 	function chechExtension(fileName,fileSize){
 		if(fileSize > maxSize) {
@@ -226,6 +226,7 @@ $(function(){
 							<ul>
 							</ul>
 						</div>
+						<!-- /.uploadResult -->
 					  </div>
 					</div>
             	</div>

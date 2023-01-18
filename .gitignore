@@ -6,6 +6,7 @@ servers/
 webprj/
 spring/
 .springBeans
+.metadata/
 .metadata
 jkpop/
 bin/

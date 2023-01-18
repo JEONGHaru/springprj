@@ -1,8 +1,0 @@
-package com.haru.service;
-
-import com.haru.domain.BoardDTO;
-
-public interface BoardService {
-
-	public BoardDTO get(int bno); // detail 
-}

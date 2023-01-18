@@ -11,6 +11,7 @@ a {
 
 .dropdown-menu>li:hover>.submenu{
 	display: block;
+	
 }
 .dropdown:hover .dropend {
     display: block;

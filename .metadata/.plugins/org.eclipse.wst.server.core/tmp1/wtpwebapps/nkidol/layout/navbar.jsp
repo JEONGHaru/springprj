@@ -23,7 +23,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg bg-light shadow-lg sticky-top">
 		<div class="container-fluid">
-			<a class="navbar-brand " href="/main"><img src="/images/jkpop.png"
+			<a class="navbar-brand " href="/main"><img src="/images/logo.png"
 				alt="" /></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
